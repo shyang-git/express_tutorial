@@ -14,5 +14,10 @@
           </li>
       <% } %>
   </ul>
+  <% if(id){ %>
+      <h2>Welcome! <%= id %> (name: <%= name %>)</h2>
+  <% }else{ %>
+      <h2> Please Login. </h2>
+  <% } %>
   </body>
 </html>

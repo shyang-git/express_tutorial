@@ -1,0 +1,14 @@
+{
+	"id_001": {
+		"password": "pass_001",
+		"name": "name_001"
+	},
+	"id_002": {
+		"password": "pass_002",
+		"name": "name_002"
+	},
+	"id_003": {
+		"name": "name_003",
+		"password": "pass_003"
+	}
+}
