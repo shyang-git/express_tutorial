@@ -17,6 +17,29 @@ router.get('/', function(req, res, next) {
 //   res.send('Hello World');
 // });
 
+router.get('/login', function(req, res, next) {
+  let sess = req.session;
+  if(sess.userid){
+    res.render('index', { title: 'Express', length: 5, id: req.session.name, name: req.session.name });
+    // res.redirect('/');
+  }else{
+    res.render('login.html');
+  }
+});
+
+router.post('/login', function(req, res, next) {
+  const { id, password } = req.body;
+  console.log('id/password: ', id, password);
+  let sess = req.session;
+  if(sess.userid){
+    res.render('index', { title: 'Express', length: 5, id: req.session.name, name: req.session.name });
+    // res.redirect('/');
+  }else{
+    res.render('login.html');
+  }
+});
+
+
 router.get('/login/:id/:password', function(req, res){
   var sess;
   sess = req.session;
