@@ -5,11 +5,11 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let sess = req.session;
-  if(sess.name){
-    res.render('index', { title: 'Express', length: 5, id: req.session.name, name: req.session.name });
+  if(sess.userid){
+    res.render('index', { title: 'Express', length: 5, id: req.session.userid, name: req.session.name });
     // res.redirect('/');
   }else{
-    res.redirect('/about');
+    res.redirect('/login');
   }
 });
 
@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 router.get('/login', function(req, res, next) {
   let sess = req.session;
   if(sess.userid){
-    res.render('index', { title: 'Express', length: 5, id: req.session.name, name: req.session.name });
+    res.render('index', { title: 'Express', length: 5, id: req.session.userid, name: req.session.name });
     // res.redirect('/');
   }else{
     res.render('login.html');
@@ -31,10 +31,14 @@ router.post('/login', function(req, res, next) {
   const { id, password } = req.body;
   console.log('id/password: ', id, password);
   let sess = req.session;
-  if(sess.userid){
-    res.render('index', { title: 'Express', length: 5, id: req.session.name, name: req.session.name });
+
+  if(id && password) {
+    sess.userid = id;
+    sess.name = 'shyang';
+
+    res.render('index', { title: 'Express', length: 5, id: req.session.userid, name: req.session.name });
     // res.redirect('/');
-  }else{
+  } else {
     res.render('login.html');
   }
 });
@@ -76,16 +80,16 @@ router.get('/login/:id/:password', function(req, res){
 
 router.get('/logout', function(req, res){
   let sess = req.session;
-  if(sess.name){
+  if(sess.userid){
       req.session.destroy(function(err){
           if(err){
               console.log(err);
           }else{
-              res.redirect('/');
+              res.redirect('/login');
           }
       })
   }else{
-      res.redirect('/');
+      res.redirect('/login');
   }
 })
 
